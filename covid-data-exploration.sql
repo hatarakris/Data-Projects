@@ -2,7 +2,7 @@ SELECT * FROM CovidDeaths cd
 WHERE continent != ''
 
 
--- Selecting Data that are going to be used.
+-- Selecting Data that are going to be used
 
 SELECT location, date, population, total_cases, new_cases, total_deaths
 FROM CovidDeaths cd 
@@ -11,7 +11,7 @@ ORDER BY location, date
 
 -- Total Cases vs. Total Deaths
 
-SELECT location, date, total_cases, total_deaths, total_deaths / total_cases * 100 AS DeathPercentange
+SELECT location, date, total_cases, total_deaths, total_deaths / total_cases * 100 AS DeathPercentage
 FROM CovidDeaths cd 
 ORDER BY location, date
 
@@ -24,7 +24,7 @@ WHERE continent IS NOT NULL
 ORDER BY location, date
 
 
--- Finding out highest percentage of infected population from each countries.
+-- Finding out highest percentage of infected population from each country
 
 SELECT location, population, MAX(CAST(total_cases AS BIGINT)) AS HighestInfectedCount, 
 MAX(CAST(total_cases AS BIGINT)) / population * 100 AS HighestInfectedPercentage
@@ -33,7 +33,7 @@ GROUP BY location, population
 ORDER BY HighestInfectedPercentage DESC
 
 
--- Finding out highest percentage of death from each countries
+-- Finding out highest percentage of death from each country
 
 SELECT location, population, MAX(CAST(total_deaths AS BIGINT)) AS HighestDeathCount,
 MAX(CAST(total_deaths AS BIGINT)) / population * 100 AS HighestDeathPercentage
@@ -51,7 +51,7 @@ GROUP BY continent
 ORDER BY TotalDeathCount DESC
 
 
--- Looking at new cases and new deaths worldwide pee day
+-- Looking at new cases and new deaths worldwide per day
 
 SELECT date, sum(new_cases) AS new_cases, sum(new_deaths) AS new_deaths, sum(new_deaths) / sum(new_cases) AS DeathPercentage
 FROM CovidDeaths cd 
@@ -60,7 +60,7 @@ GROUP BY date
 ORDER BY 1,2
 
 
--- Finding out total vaccinations using CTE
+-- Finding out total vaccinations using Common Table Expression (CTE)
 
 WITH PopVac (Continent, Location, Date, Population, New_Vaccinations, Population_Vaccinated)
 AS
